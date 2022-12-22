@@ -143,6 +143,14 @@ def install_win_update():
 def update_system():
     os.system("Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoReboot")
 
+def install_wsl():
+    if confirm_request("WSL"):
+        os.system("dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart")
+        os.system("dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart")
+        os.system("wsl --install")
+    else:
+        print("WSL will not be installed")
+
 # -----------------------------------------------
 
 clear_screen()
@@ -151,3 +159,4 @@ install_all_id(software_to_install_id)
 install_choco()
 install_scoop()
 install_win_update()
+install_wsl()
