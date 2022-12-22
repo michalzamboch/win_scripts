@@ -31,7 +31,6 @@ software_to_install_id = [
     "JGraph.Draw",
     "Microsoft.VisualStudio.2022.Community",
     "Brave.Brave",
-    "Canonical.Ubuntu.2204",
     "Discord.Discord",
     "EaseUS.PartitionMaster",
     "Fedora.FedoraMediaWriter",
@@ -148,6 +147,7 @@ def install_wsl():
         os.system("dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart")
         os.system("dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart")
         os.system("wsl --install")
+        os.system("winget install --id Canonical.Ubuntu.2204")
     else:
         print("WSL will not be installed")
 
