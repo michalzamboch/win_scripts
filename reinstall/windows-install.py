@@ -81,7 +81,66 @@ def confirm_request(what = "following software"):
     print("Do you want to install %s? [y/n]" % what)
     x = input()
     return confirm(x)
+
+def clear_screen():
+    os.system("cls")
+
+# -----------------------------------------------
+
+class SimpleSerializer():
+
+    __cmds = []
+    name = ""
+
+    def __init__(self, cmds_list, name):
+        self.__cmds = cmds_list
+        self.name = name
+        pass
+
+    def execute(self):
+        print("")
+        if confirm_request(self.name):
+            for item in self.__cmds:
+                os.system(item)
+        else:
+            print("%s will not be installed" % self.name)
+        pass
     
+    def print(self):
+        print(">>> %s" % self.name)
+        for item in self.__cmds:
+            print(item)
+        print("")
+        pass
+
+# -----------------------------------------------
+
+class MainSerializer:
+
+    __series = []
+    
+    def __init__(self):
+        pass
+
+    def append(self, item: SimpleSerializer):
+        self.__series.append(item)
+        pass
+
+    def append_all(self, items: list):
+        for item in items:
+            self.append(item)
+        pass
+    
+    def execute(self):
+        for item in self.__series:
+            item.execute()
+        pass
+    
+    def print_all(self):
+        for item in self.__series:
+            item.print()
+        pass
+
 # -----------------------------------------------
 
 def print_all_install_cmds(ls):
@@ -114,49 +173,56 @@ def install_all_id(ls):
         print("Nothing will be installed")
     pass
 
-def clear_screen():
-    os.system("cls")
-
-def install_scoop():
-    if confirm_request("scoop"):
-        os.system("Set-ExecutionPolicy RemoteSigned -Scope CurrentUser")
-        os.system("irm get.scoop.sh | iex")
-        os.system("scoop bucket add extras")
-    else:
-        print("Scoop will not be installed")
-
-def install_choco():
-    if confirm_request("Chocolatey"):
-        os.system("Set-ExecutionPolicy Bypass -Scope Process")
-        os.system("Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))")
-    else:
-        print("Chocolatey will not be installed")
-
-def install_win_update():
-    if confirm_request("Windows Update Powershell"):
-        os.system("Install-Module PSWindowsUpdate")
-        os.system("Add-WUServiceManager -MicrosoftUpdate")
-    else:
-        print("Windows Update Powershell will not be installed")
-
 def update_system():
     os.system("Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoReboot")
 
-def install_wsl():
-    if confirm_request("WSL"):
-        os.system("dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart")
-        os.system("dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart")
-        os.system("wsl --install")
-        os.system("winget install --id Canonical.Ubuntu.2204")
-    else:
-        print("WSL will not be installed")
+# -----------------------------------------------
+
+ls = [
+    "Set-ExecutionPolicy RemoteSigned -Scope CurrentUser",
+    "irm get.scoop.sh | iex",
+    "scoop bucket add extras"
+]
+scoop = SimpleSerializer(ls, "Scoop")
+
+ls = [
+    "Set-ExecutionPolicy Bypass -Scope Process",
+    "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))"
+]
+choco = SimpleSerializer(ls, "Chocolatey")
+
+ls = [
+    "Install-Module PSWindowsUpdate",
+    "Add-WUServiceManager -MicrosoftUpdate"
+]
+win_update = SimpleSerializer(ls, "PowerShell Windows Update")
+
+ls = [
+    "dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart",
+    "dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart",
+    "wsl --install",
+    "winget install --id Canonical.Ubuntu.2204"
+]
+wsl = SimpleSerializer(ls, "WSL")
+
+ls = [
+    "pushd",
+    "cd C:",
+    "mkdir dev",
+    "cd dev",
+    "git clone https://github.com/Microsoft/vcpkg.git",
+    ".\vcpkg\bootstrap-vcpkg.bat",
+    "vcpkg integrate install",
+    "popd"
+]
+vcpkg = SimpleSerializer(ls, "vcpkg")
 
 # -----------------------------------------------
 
 clear_screen()
+
 install_all_id(software_to_install_id)
 
-install_choco()
-install_scoop()
-install_win_update()
-install_wsl()
+main_series = MainSerializer()
+main_series.append_all([scoop, choco, win_update, wsl, vcpkg])
+main_series.print_all()
