@@ -150,7 +150,7 @@ def get_install_command(program):
     return "winget install --silent \"%s\"" % program
 
 def get_install_command_id(program_id):
-    return "winget install --silent --id \"%s\"" % program_id
+    return "winget install --silent --accept-package-agreements --accept-source-agreements --id \"%s\"" % program_id
 
 def install_program(program):
     os.system(get_install_command(program))
