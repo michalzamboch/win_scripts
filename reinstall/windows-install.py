@@ -32,7 +32,6 @@ software_to_install_id = [
     "Microsoft.VisualStudio.2022.Community",
     "Brave.Brave",
     "Discord.Discord",
-    "EaseUS.PartitionMaster",
     "Fedora.FedoraMediaWriter",
     "Git.Git",
     "REALiX.HWiNFO",
@@ -49,7 +48,6 @@ software_to_install_id = [
     "Ghisler.TotalCommander",
     "VideoLAN.VLC",
     "Wargaming.GameCenter",
-    "WinMerge.WinMerge",
     "Balena.Etcher",
     "Axosoft.GitKraken",
     "MiniTool.PartitionWizard.Free",
@@ -63,6 +61,7 @@ software_to_install_id = [
     "Oracle.VirtualBox",
     "Nvidia.GeForceExperience",
     "EpicGames.EpicGamesLauncher",
+    "Mojang.MinecraftLauncher"
 ]
 
 # -----------------------------------------------
