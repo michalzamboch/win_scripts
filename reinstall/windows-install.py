@@ -148,7 +148,7 @@ wsl = SimpleSerializer(ls, "WSL")
 ls = [
     "git clone https://github.com/Microsoft/vcpkg.git C:\\dev\\vcpkg",
     "C:\\dev\\vcpkg\\bootstrap-vcpkg.bat -disableMetrics",
-    "C:\\dev\\vcpkg integrate install",
+    "C:\\dev\\vcpkg\\vcpkg integrate install",
 ]
 vcpkg = SimpleSerializer(ls, "vcpkg")
 
