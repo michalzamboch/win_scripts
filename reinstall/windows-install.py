@@ -151,7 +151,7 @@ ls = [
     "mkdir dev",
     "cd dev",
     "git clone https://github.com/Microsoft/vcpkg.git C:\\dev\\vcpkg",
-    "C:\\dev\\vcpkg\\bootstrap-vcpkg.bat --disable-metrics",
+    "C:\\dev\\vcpkg\\bootstrap-vcpkg.bat -disableMetrics",
     "C:\\dev\\vcpkg integrate install",
     "popd"
 ]
