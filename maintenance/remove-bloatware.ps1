@@ -17,6 +17,8 @@ $apps_to_delete =
     "*bingweather*",
     "*xboxapp*"
 
+Import-Module Appx
+
 foreach ($item in $apps_to_delete) {
     Get-AppxPackage $item | Remove-AppxPackage
 }
