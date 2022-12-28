@@ -150,9 +150,9 @@ ls = [
     "cd C:\\",
     "mkdir dev",
     "cd dev",
-    "git clone https://github.com/Microsoft/vcpkg.git C:\\dev",
-    ".\\vcpkg\\bootstrap-vcpkg.bat --disable-metrics",
-    ".\\vcpkg integrate install",
+    "git clone https://github.com/Microsoft/vcpkg.git C:\\dev\\vcpkg",
+    "C:\\dev\\vcpkg\\bootstrap-vcpkg.bat --disable-metrics",
+    "C:\\dev\\vcpkg integrate install",
     "popd"
 ]
 vcpkg = SimpleSerializer(ls, "vcpkg")
