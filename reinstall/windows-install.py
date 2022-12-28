@@ -1,70 +1,6 @@
 import os
 
-# -----------------------------------------------
-
-software_to_install = [
-    "Peazip",
-    "Visual Studio Community 2022",
-    "Brave",
-    "Discord",
-    "Epic Games Launcher",
-    "EaseUS Partition Master",
-    "NVIDIA GeForce Experience",
-    "Enlisted Launcher",
-    "balenaEtcher",
-    "VLC media player",
-    "Total Commander",
-    "Sublime Text 4",
-    "Steam",
-    "Spotify",
-    "SourceTree",
-    "KeePass Password Safe",
-    "Minecraft Launcher",
-    "Git",
-    "Microsoft Visual Studio Code",
-    "Fedora Media Writer",
-    "Java 8",
-    "HWiNFO"
-]
-
-software_to_install_id = [
-    "JGraph.Draw",
-    "Microsoft.VisualStudio.2022.Community",
-    "Brave.Brave",
-    "Discord.Discord",
-    "Fedora.FedoraMediaWriter",
-    "Git.Git",
-    "REALiX.HWiNFO",
-    "JetBrains.IntelliJIDEA.Community",
-    "DominikReichl.KeePass",
-    "LLVM.LLVM",
-    "Microsoft.PowerShell",
-    "Microsoft.WindowsTerminal",
-    "Safing.Portmaster",
-    "Rustlang.Rustup",
-    "Atlassian.Sourcetree",
-    "Spotify.Spotify",
-    "Valve.Steam",
-    "Ghisler.TotalCommander",
-    "VideoLAN.VLC",
-    "Wargaming.GameCenter",
-    "Balena.Etcher",
-    "Axosoft.GitKraken",
-    "MiniTool.PartitionWizard.Free",
-    "Oracle.JavaRuntimeEnvironment",
-    "Giorgiotani.Peazip",
-    "GaijinNetwork.Enlisted",
-    "Neovim.Neovim",
-    "Microsoft.VisualStudioCode",
-    "Oracle.JDK.19",
-    "SomePythonThings.WingetUIStore",
-    "Oracle.VirtualBox",
-    "Nvidia.GeForceExperience",
-    "EpicGames.EpicGamesLauncher",
-    "Mojang.MinecraftLauncher"
-]
-
-# -----------------------------------------------
+# Helpful functions -----------------------------------------------
 
 def line():
     print("----------------------------------------")
@@ -84,7 +20,7 @@ def confirm_request(what = "following software"):
 def clear_screen():
     os.system("cls")
 
-# -----------------------------------------------
+# Serializing commands -----------------------------------------------
 
 class SimpleSerializer():
 
@@ -108,11 +44,11 @@ class SimpleSerializer():
     def print(self):
         print(">>> %s" % self.name)
         for item in self.__cmds:
-            print(item)
+            print("    " + item)
         print("")
         pass
 
-# -----------------------------------------------
+# Serializing serialized commands -----------------------------------------------
 
 class MainSerializer:
 
@@ -140,42 +76,36 @@ class MainSerializer:
             item.print()
         pass
 
-# -----------------------------------------------
+# Commands functions -----------------------------------------------
 
-def print_all_install_cmds(ls):
-    for item in ls:
-        print(get_install_command(item))
-
-def get_install_command(program):
-    return "winget install --silent \"%s\"" % program
+def load_software_ids():
+    lines = []
+    with open('src/software_ids.txt') as f:
+        for x in f:
+            tmp = x.strip()
+            lines.append(tmp)
+    return lines
 
 def get_install_command_id(program_id):
     return "winget install --silent --accept-package-agreements --accept-source-agreements --id \"%s\"" % program_id
 
-def install_program(program):
-    os.system(get_install_command(program))
+def get_all_install_commands(ls):
+    result = []
+    for cmd in ls:
+        result.append(get_install_command_id(cmd))
+    return result
 
 def install_program_id(program_id):
     os.system(get_install_command_id(program_id))
 
-def install_all_id(ls):
-    print("Programms to install:")
-    line()
-    print_all(ls)
-    print_all_install_cmds(ls)
-    line()
-    
-    if confirm_request():
-        for item in ls:
-            print(item)
-    else:
-        print("Nothing will be installed")
-    pass
-
 def update_system():
     os.system("Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoReboot")
 
-# -----------------------------------------------
+# Loading data -----------------------------------------------
+
+tmp = load_software_ids()
+ls = get_all_install_commands(tmp)
+all_programs = SimpleSerializer(ls, "All Programs")
 
 ls = [
     "Set-ExecutionPolicy RemoteSigned -Scope CurrentUser",
@@ -210,18 +140,16 @@ ls = [
     "mkdir dev",
     "cd dev",
     "git clone https://github.com/Microsoft/vcpkg.git",
-    ".\vcpkg\bootstrap-vcpkg.bat",
+    ".\\vcpkg\\bootstrap-vcpkg.bat",
     "vcpkg integrate install",
     "popd"
 ]
 vcpkg = SimpleSerializer(ls, "vcpkg")
 
-# -----------------------------------------------
+# Executing script -----------------------------------------------
 
 clear_screen()
 
-install_all_id(software_to_install_id)
-
 main_series = MainSerializer()
-main_series.append_all([scoop, choco, win_update, wsl, vcpkg])
+main_series.append_all([all_programs, scoop, choco, win_update, wsl, vcpkg])
 main_series.print_all()
