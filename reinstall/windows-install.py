@@ -1,4 +1,5 @@
 import os
+import sys
 
 # Helpful functions -----------------------------------------------
 
@@ -14,6 +15,8 @@ def confirm(x):
 
 def confirm_request(what = "following software"):
     print("Do you want to install %s? [y/n]" % what)
+    sys.stdout.flush()
+    sys.stdin.flush()
     x = input()
     return confirm(x)
 
@@ -149,7 +152,7 @@ ls = [
     "cd dev",
     "git clone https://github.com/Microsoft/vcpkg.git",
     ".\\vcpkg\\bootstrap-vcpkg.bat",
-    "vcpkg integrate install",
+    ".\\vcpkg integrate install",
     "popd"
 ]
 vcpkg = SimpleSerializer(ls, "vcpkg")
