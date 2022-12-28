@@ -152,4 +152,4 @@ clear_screen()
 
 main_series = MainSerializer()
 main_series.append_all([all_programs, scoop, choco, win_update, wsl, vcpkg])
-main_series.print_all()
+main_series.execute()
