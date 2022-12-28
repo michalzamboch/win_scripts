@@ -147,11 +147,11 @@ wsl = SimpleSerializer(ls, "WSL")
 
 ls = [
     "pushd",
-    "cd C:",
+    "cd C:\\",
     "mkdir dev",
     "cd dev",
     "git clone https://github.com/Microsoft/vcpkg.git",
-    ".\\vcpkg\\bootstrap-vcpkg.bat",
+    ".\\vcpkg\\bootstrap-vcpkg.bat --disable-metrics",
     ".\\vcpkg integrate install",
     "popd"
 ]
