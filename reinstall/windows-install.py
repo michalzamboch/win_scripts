@@ -26,6 +26,7 @@ class SimpleSerializer():
 
     __cmds = []
     name = ""
+    __messages = []
 
     def __init__(self, cmds_list, name):
         self.__cmds = cmds_list
@@ -34,12 +35,18 @@ class SimpleSerializer():
 
     def execute(self):
         print("")
+        if self.__messages != []:
+            print_all(self.__messages)
+        
         if confirm_request(self.name):
             for item in self.__cmds:
                 os.system(item)
         else:
             print("%s will not be installed" % self.name)
         pass
+
+    def add_messages(self, messages):
+        self.__messages = messages
     
     def print(self):
         print(">>> %s" % self.name)
@@ -106,6 +113,7 @@ def update_system():
 tmp = load_software_ids()
 ls = get_all_install_commands(tmp)
 all_programs = SimpleSerializer(ls, "All Programs")
+all_programs.add_messages(tmp)
 
 ls = [
     "Set-ExecutionPolicy RemoteSigned -Scope CurrentUser",
