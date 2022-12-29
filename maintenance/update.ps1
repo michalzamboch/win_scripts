@@ -6,6 +6,6 @@ if (-Not (Get-Module -ListAvailable -Name "PSWindowsUpdate")) {
     Add-WUServiceManager -MicrosoftUpdate
 }
 
-Write-Host ""
+Write-Host "Installing updates..."
 Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoReboot
 Write-Host "Windows Update is done."
