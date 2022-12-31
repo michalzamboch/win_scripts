@@ -32,3 +32,4 @@ Oracle.VirtualBox
 Nvidia.GeForceExperience
 EpicGames.EpicGamesLauncher
 Mojang.MinecraftLauncher
+ArduinoSA.IDE.stable
