@@ -94,6 +94,8 @@ function test_script() {
     request_script "..\test.ps1" "TEST"
 }
 
+# ------------------------------------------------------------------------
+
 function main() {
     update_script
     winget_install_all
@@ -105,5 +107,3 @@ function main() {
 }
 
 # ------------------------------------------------------------------------
-
-winget_install_all
