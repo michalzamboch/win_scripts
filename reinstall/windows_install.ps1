@@ -58,7 +58,7 @@ function check_prerequisites() {
 
     if (-Not (is_admin)) {
         Write-Host ""
-        Write-Host "You have to run this script as a Administrator." -ForegroundColor Red
+        Write-Host "You have to run this script as an Administrator." -ForegroundColor Red
         Write-Host ""
         exit
     }
