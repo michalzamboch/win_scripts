@@ -37,7 +37,7 @@ function winget_install_all() {
 
     $HOST.UI.RawUI.Flushinputbuffer()
 
-    $programs = (read_programs $programs_list_path)
+    $programs = read_programs $programs_list_path
     print_all $programs
     
     $input = Read-Host -Prompt ("Do you want to install following software? [y/n]")
