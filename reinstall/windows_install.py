@@ -158,5 +158,5 @@ vcpkg = SimpleSerializer(ls, "vcpkg")
 clear_screen()
 
 main_series = MainSerializer()
-main_series.append_all([all_programs, scoop, choco, win_update, wsl, vcpkg])
+main_series.append_all([all_programs])
 main_series.execute()

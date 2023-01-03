@@ -1,8 +1,12 @@
 $programs =
     "cmake",
     "gcc",
-    "maven"
+    "maven",
+    "vcpkg",
+    "conan",
+    "ninja"
 
+scoop update --all
 foreach ($item in $programs) {
     scoop install $item
 }
