@@ -1,50 +1,3 @@
-function read_programs() {
-    
-    foreach ($line in Get-Content .\src\software_ids.txt) {
-        $programs += ,$line
-    }
-
-    return $programs
-}
-
-function print_all($list) {
-    foreach ($item in $list) {
-        $line = "  " + $item
-        echo $line
-    }
-}
-
-function winget_install($fileName) {
-    foreach ($line in Get-Content $fileName) {
-        winget install --silent --accept-package-agreements --accept-source-agreements --id $line
-    }
-}
-
-function install_list($list) {
-    foreach ($line in $list) {
-        winget install --silent --accept-package-agreements --accept-source-agreements --id $line
-    }
-}
-
-function winget_install_all() {
-
-    $HOST.UI.RawUI.Flushinputbuffer()
-
-    $programs = read_programs
-    print_all $programs
-    
-    $input = Read-Host -Prompt ("Do you want to install following software? [y/n]")
-    $first_lettet = $input.SubString(0,1)
-
-    if ($first_lettet -eq "y" -or $first_lettet -eq "Y") {
-        install_list $programs
-    }
-    else {
-        echo "Programs will not be installed..."
-    }
-}
-
-# ------------------------------------------------------------------------
 
 function request_script([string]$scriptLocation, [string]$scriptName) {
 
@@ -70,8 +23,8 @@ function update_script() {
     request_script "..\maintenance\update.ps1" "Windows Update"
 }
 
-function install_all_programs() {
-    python windows_install.py
+function install_winget_programs() {
+    . "..\modules\install_winget_programs.ps1"
 }
 
 function install_choco() {
@@ -98,7 +51,7 @@ function test_script() {
 
 function main() {
     update_script
-    winget_install_all
+    install_winget_programs
 
     install_chocolate
     install_scoop
@@ -107,3 +60,4 @@ function main() {
 }
 
 # ------------------------------------------------------------------------
+
