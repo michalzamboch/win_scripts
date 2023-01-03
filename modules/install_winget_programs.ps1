@@ -1,5 +1,4 @@
 function read_programs() {
-    
     foreach ($line in Get-Content ..\reinstall\src\software_ids.txt) {
         $programs += ,$line
     }
