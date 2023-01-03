@@ -1,5 +1,10 @@
-function read_programs() {
-    foreach ($line in Get-Content ..\reinstall\src\software_ids.txt) {
+
+$programs_list_path = "..\source\software_ids.txt"
+
+# ----------------------------------------------------------------
+
+function read_programs($list_path) {
+    foreach ($line in Get-Content $list_path) {
         $programs += ,$line
     }
 
@@ -8,8 +13,7 @@ function read_programs() {
 
 function print_all($list) {
     foreach ($item in $list) {
-        $line = "  " + $item
-        echo $line
+        echo ("  " + $item)
     }
 }
 
@@ -33,7 +37,7 @@ function winget_install_all() {
 
     $HOST.UI.RawUI.Flushinputbuffer()
 
-    $programs = read_programs
+    $programs = (read_programs $programs_list_path)
     print_all $programs
     
     $input = Read-Host -Prompt ("Do you want to install following software? [y/n]")
@@ -45,6 +49,10 @@ function winget_install_all() {
     else {
         echo "Programs will not be installed..."
     }
+    
+    Write-Host ""
 }
+
+# ----------------------------------------------------------------
 
 winget_install_all

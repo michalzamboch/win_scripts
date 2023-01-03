@@ -11,6 +11,8 @@ function request_script([string]$scriptLocation, [string]$scriptName) {
     else {
         echo ($scriptName + " will not be installed...")
     }
+
+    Write-Host ""
 }
 
 # ------------------------------------------------------------------------
@@ -45,7 +47,7 @@ function main() {
     update_script
     install_winget_programs
 
-    install_chocolate
+    install_choco
     install_scoop
     install_scoop_programs
     install_wsl

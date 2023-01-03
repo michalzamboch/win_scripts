@@ -90,7 +90,7 @@ class MainSerializer:
 
 def load_software_ids():
     lines = []
-    with open('src/software_ids.txt') as f:
+    with open('..\source\software_ids.txt') as f:
         for x in f:
             tmp = x.strip()
             lines.append(tmp)
