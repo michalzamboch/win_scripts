@@ -15,10 +15,6 @@ function request_script([string]$scriptLocation, [string]$scriptName) {
 
 # ------------------------------------------------------------------------
 
-function install_script_prerequisites() {
-    winget install --silent --accept-package-agreements --accept-source-agreements --id Python.Python.3.11
-}
-
 function update_script() {
     request_script "..\maintenance\update.ps1" "Windows Update"
 }
@@ -41,10 +37,6 @@ function install_scoop_programs() {
 
 function install_wsl() {
     request_script "..\modules\install_wsl.ps1" "WSL"
-}
-
-function test_script() {
-    request_script "..\test.ps1" "TEST"
 }
 
 # ------------------------------------------------------------------------
