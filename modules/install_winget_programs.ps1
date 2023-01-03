@@ -13,15 +13,19 @@ function print_all($list) {
     }
 }
 
-function winget_install($fileName) {
+function winget_install($program) {
+    winget install --silent --accept-package-agreements --accept-source-agreements --id $program
+}
+
+function winget_install_file($fileName) {
     foreach ($line in Get-Content $fileName) {
-        winget install --silent --accept-package-agreements --accept-source-agreements --id $line
+        winget_install $line
     }
 }
 
-function install_list($list) {
+function winget_install_list($list) {
     foreach ($line in $list) {
-        winget install --silent --accept-package-agreements --accept-source-agreements --id $line
+        winget_install $line
     }
 }
 
