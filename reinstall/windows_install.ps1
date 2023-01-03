@@ -43,7 +43,30 @@ function install_wsl() {
 
 # ------------------------------------------------------------------------
 
+function is_admin() {
+    $currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+    return $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+}
+
+function check_prerequisites() {
+    if (-Not (Get-Command "winget")) {
+        Write-Host ""
+        Write-Host "You have to install winget first, to run this script." -ForegroundColor Red 
+        Write-Host ""
+        exit
+    }
+
+    if (-Not (is_admin)) {
+        Write-Host ""
+        Write-Host "You have to run this script as a Administrator." -ForegroundColor Red
+        Write-Host ""
+        exit
+    }
+}
+
 function main() {
+    check_prerequisites
+
     update_script
     install_winget_programs
 
