@@ -64,7 +64,7 @@ function winget_install_all() {
     $first_lettet = $input.SubString(0,1)
 
     if ($first_lettet -eq "y" -or $first_lettet -eq "Y") {
-        install_list $programs
+        winget_install_list $programs
     }
     else {
         echo "Programs will not be installed..."
