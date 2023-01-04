@@ -1,5 +1,5 @@
 
-$programs_list_path = "..\source\software_ids.txt"
+$programs_list_path = "..\source\winget_ids.txt"
 
 # ----------------------------------------------------------------
 

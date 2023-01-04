@@ -1,12 +1,6 @@
-$programs =
-    "cmake",
-    "gcc",
-    "maven",
-    "vcpkg",
-    "conan",
-    "ninja"
+$scoop_programs_list = "..\source\scoop_ids.txt"
 
 scoop update --all
-foreach ($item in $programs) {
+foreach ($item in Get-Content $scoop_programs_list) {
     scoop install $item
 }
