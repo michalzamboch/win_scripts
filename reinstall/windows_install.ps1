@@ -4,6 +4,10 @@ $manual = $argument -ne "-y"
 
 # ------------------------------------------------------------------------
 
+function print_line() {
+    Write-Host "-----------------------------------------------------"
+}
+
 function print_all([string]$location) {
     foreach ($line in Get-Content $location) {
         Write-host (" - " + $line)
