@@ -1,11 +1,26 @@
 
+$argument = $args[0]
+$manual = $argument -ne "-y"
+
+# ------------------------------------------------------------------------
+
+function print_all([string]$location) {
+    foreach ($line in Get-Content $location) {
+        Write-host (" - " + $line)
+    }
+}
+
 function request_script([string]$scriptLocation, [string]$scriptName) {
 
-    $HOST.UI.RawUI.Flushinputbuffer()
-    $input = Read-Host -Prompt ("Do you want to install "+ $scriptName +" ? [y/n]")
+    $first_lettet = ""
     
-    $first_lettet = $input.SubString(0,1)
-    if ($first_lettet -eq "y" -or $first_lettet -eq "Y") {
+    if ($manual) {
+        $HOST.UI.RawUI.Flushinputbuffer()
+        $input = Read-Host -Prompt ("Do you want to install "+ $scriptName +" ? [y/n]")
+        $first_lettet = $input.SubString(0,1)
+    }
+
+    if ($first_lettet -eq "y" -or $first_lettet -eq "Y" -or $manual) {
         . $scriptLocation
     }
     else {
@@ -17,12 +32,13 @@ function request_script([string]$scriptLocation, [string]$scriptName) {
 
 # ------------------------------------------------------------------------
 
-function update_script() {
+function update_script() { 
     request_script "..\maintenance\update.ps1" "Windows Update"
 }
 
 function install_winget_programs() {
-    . "..\modules\install_winget_programs.ps1"
+    print_all "..\source\winget_ids.txt"
+    request_script "..\modules\install_winget_programs.ps1" "Winget packages"
 }
 
 function install_choco() {
@@ -34,6 +50,7 @@ function install_scoop() {
 }
 
 function install_scoop_programs() {
+    print_all "..\source\scoop_ids.txt"
     request_script "..\modules\install_scoop_programs.ps1" "Scoop packages"
 }
 
@@ -61,6 +78,12 @@ function check_prerequisites() {
         Write-Host "You have to run this script as an Administrator." -ForegroundColor Red
         Write-Host ""
         exit
+    }
+}
+
+function welcome_message() {
+    foreach ($line in Get-Content ".\README.txt") {
+        Write-host (" - " + $line)
     }
 }
 
