@@ -12,16 +12,20 @@ function print_all([string]$location) {
 
 function request_script([string]$scriptLocation, [string]$scriptName) {
 
-    $first_lettet = ""
+    $choice = ""
     
     if ($manual) {
         $HOST.UI.RawUI.Flushinputbuffer()
-        $input = Read-Host -Prompt ("Do you want to install "+ $scriptName +" ? [y/n]")
-        $first_lettet = $input.SubString(0,1)
+        Write-Host ("Do you want to install "+ $scriptName +" [y/n]? ") -ForegroundColor Blue -NoNewline
+        $input = Read-Host 
+        $choice = $input.SubString(0,1)
     }
 
-    if ($first_lettet -eq "y" -or $first_lettet -eq "Y" -or $manual) {
+    if ($choice -eq "y" -or $choice -eq "Y") {
         . $scriptLocation
+    }
+    elseif ($choice -eq "q") {
+        exit 0
     }
     else {
         echo ($scriptName + " will not be installed...")
@@ -82,13 +86,19 @@ function check_prerequisites() {
 }
 
 function welcome_message() {
+    cls
+
     foreach ($line in Get-Content ".\README.txt") {
-        Write-host (" - " + $line)
+        Write-host $line -ForegroundColor Green
     }
+
+    Write-host "Press enter to continue..."
+    Read-Host
 }
 
 function main() {
     check_prerequisites
+    welcome_message
 
     update_script
     install_winget_programs
