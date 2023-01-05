@@ -14,16 +14,15 @@ function print_all([string]$location) {
     }
 }
 
-function request_script([string]$scriptLocation, [string]$scriptName) {
+function ask_input([string]$scriptName) {
+    $HOST.UI.RawUI.Flushinputbuffer()
+    Write-Host ("Do you want to install "+ $scriptName +" [y/n]? ") -ForegroundColor Blue -NoNewline
+    $input = Read-Host 
+    return $input.SubString(0,1)
+}
 
-    $choice = ""
-    
-    if ($manual) {
-        $HOST.UI.RawUI.Flushinputbuffer()
-        Write-Host ("Do you want to install "+ $scriptName +" [y/n]? ") -ForegroundColor Blue -NoNewline
-        $input = Read-Host 
-        $choice = $input.SubString(0,1)
-    }
+function manual_script([string]$scriptLocation, [string]$scriptName) {
+    $choice = ask_input $scriptName
 
     if ($choice -eq "y" -or $choice -eq "Y") {
         . $scriptLocation
@@ -32,7 +31,17 @@ function request_script([string]$scriptLocation, [string]$scriptName) {
         exit 0
     }
     else {
-        echo ($scriptName + " will not be installed...")
+        Write-Host ($scriptName + " will not be installed...")
+    }
+}
+
+function request_script([string]$scriptLocation, [string]$scriptName) {
+    
+    if ($manual) {
+        manual_script $scriptLocation $scriptName
+    }
+    else {
+        . $scriptLocation
     }
 
     Write-Host ""
@@ -96,7 +105,7 @@ function welcome_message() {
         Write-host $line -ForegroundColor Green
     }
 
-    Write-host "Press enter to continue..."
+    Write-host "Press enter to continue..." -NoNewline
     Read-Host
 }
 
