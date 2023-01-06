@@ -27,7 +27,6 @@ GaijinNetwork.Enlisted
 Neovim.Neovim
 Microsoft.VisualStudioCode
 Oracle.JDK.19
-SomePythonThings.WingetUIStore
 Oracle.VirtualBox
 Nvidia.GeForceExperience
 EpicGames.EpicGamesLauncher
