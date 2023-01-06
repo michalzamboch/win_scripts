@@ -16,7 +16,7 @@ function print_all([string]$location) {
 
 function ask_input([string]$scriptName) {
     $HOST.UI.RawUI.Flushinputbuffer()
-    Write-Host ("Do you want to install "+ $scriptName +" [y/n]? ") -ForegroundColor Blue -NoNewline
+    Write-Host ("Do you want to install "+ $scriptName +" [y/n]? ") -ForegroundColor Cyan -NoNewline
     $input = Read-Host 
     return $input.SubString(0,1)
 }
