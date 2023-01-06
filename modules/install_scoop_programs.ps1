@@ -10,5 +10,6 @@ function scoop_install($program) {
 
 scoop update --all
 foreach ($item in Get-Content $scoop_packakes_path) {
+    Write-Host ""
     scoop_install $item
 }

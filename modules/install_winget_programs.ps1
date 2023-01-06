@@ -9,5 +9,6 @@ function winget_install($program) {
 # ----------------------------------------------------------------
 
 foreach ($item in Get-Content $winget_packakes_path) {
+    Write-Host ""
     winget_install $item
 }

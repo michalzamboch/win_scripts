@@ -54,8 +54,15 @@ function update_script() {
 }
 
 function install_winget_programs() {
-    print_all "..\source\winget_ids.txt"
-    request_script "..\modules\install_winget_programs.ps1" "Winget packages"
+    if (Get-Command winget) {
+        print_all "..\source\winget_ids.txt"
+        request_script "..\modules\install_winget_programs.ps1" "Winget packages"
+    }
+    else {
+        Write-Host
+        Write-Host "Missing Winget package manager." -ForegroundColor Yellow
+        Write-Host
+    }
 }
 
 function install_choco() {
@@ -67,8 +74,15 @@ function install_scoop() {
 }
 
 function install_scoop_programs() {
-    print_all "..\source\scoop_ids.txt"
-    request_script "..\modules\install_scoop_programs.ps1" "Scoop packages"
+    if (Get-Command scoop){
+        print_all "..\source\scoop_ids.txt"
+        request_script "..\modules\install_scoop_programs.ps1" "Scoop packages"
+    }
+    else {
+        Write-Host
+        Write-Host "Missing Scoop package manager." -ForegroundColor Yellow
+        Write-Host
+    }
 }
 
 function install_wsl() {
