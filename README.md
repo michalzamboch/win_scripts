@@ -3,5 +3,5 @@ This repository is a collection of windows scripts, which automate work on Windo
 
 ## Allow executing scripts
 ```powershell
-Set-ExecutionPolicy AllSigned
+Set-ExecutionPolicy unrestricted
 ```
