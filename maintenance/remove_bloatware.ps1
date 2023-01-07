@@ -3,7 +3,7 @@ $packakes_path = "..\source\bloatware_ids.txt"
 # ----------------------------------------------------------------
 
 function winget_uninstall($program) {
-    winget uninstall --silent --accept-source-agreements --force --id $program
+    winget uninstall --silent --accept-source-agreements --force --purge --id $program
 }
 
 # ----------------------------------------------------------------
