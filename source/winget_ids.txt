@@ -17,14 +17,11 @@ Spotify.Spotify
 Valve.Steam
 Ghisler.TotalCommander
 VideoLAN.VLC
-Wargaming.GameCenter
 Balena.Etcher
 Axosoft.GitKraken
 MiniTool.PartitionWizard.Free
 Oracle.JavaRuntimeEnvironment
 Giorgiotani.Peazip
-GaijinNetwork.Enlisted
-Neovim.Neovim
 Microsoft.VisualStudioCode
 Oracle.JDK.19
 Oracle.VirtualBox
@@ -32,3 +29,4 @@ Nvidia.GeForceExperience
 EpicGames.EpicGamesLauncher
 Mojang.MinecraftLauncher
 ArduinoSA.IDE.stable
+AntibodySoftware.WizTree
