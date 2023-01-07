@@ -8,12 +8,12 @@ To run automatic reinstall script (.\reinstall\win_install.ps1) type following c
 ```
 
 ## Updates
-To get the newest updates, irst you have to have installed git.
+To get the newest updates, first you have to have installed git.
 Then run following commmand:
 ```poweshell
 git pull
 ```
-or you can download it from my github repository:
+Or you can download it from github repository:
 https://github.com/michalzamboch/win_scripts
 
 ## Allow executing scripts
