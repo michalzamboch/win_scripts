@@ -1,24 +1,16 @@
-$apps_to_delete =
-    "*3dbuilder*",
-    "*windowscommunicationsapps*",
-    "*officehub*",
-    "*skypeapp*",
-    "*getstarted*",
-    "*zunemusic*",
-    "*windowsmaps*",
-    "*solitairecollection*",
-    "*bingfinance*",
-    "*zunevideo*",
-    "*bingnews*",
-    "*onenote*",
-    "*people*",
-    "*windowsphone*",
-    "*bingsports*",
-    "*bingweather*",
-    "*xboxapp*"
+$packakes_path = "..\source\bloatware_ids.txt"
 
-Import-Module Appx
+# ----------------------------------------------------------------
 
-foreach ($item in $apps_to_delete) {
-    Get-AppxPackage $item | Remove-AppxPackage
+function winget_uninstall($program) {
+    winget uninstall --silent --accept-source-agreements --force --purge --id $program
+}
+
+# ----------------------------------------------------------------
+
+if (Get-Command winget) {
+    foreach ($item in Get-Content $packakes_path) {
+        Write-Host ""
+        winget_uninstall $item
+    }
 }
