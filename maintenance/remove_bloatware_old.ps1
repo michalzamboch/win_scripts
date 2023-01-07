@@ -29,3 +29,7 @@ function main() {
         Get-AppxPackage $item | Remove-AppxPackage
     }
 }
+
+# ----------------------------------------------------
+
+main

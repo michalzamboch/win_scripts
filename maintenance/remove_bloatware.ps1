@@ -14,3 +14,6 @@ if (Get-Command winget) {
         winget_uninstall "$item"
     }
 }
+else {
+    Write-Host "Need to have installed winget package." -Foregroundcolor Red
+}

@@ -14,15 +14,15 @@ function print_all([string]$location) {
     }
 }
 
-function ask_input([string]$scriptName) {
+function ask_input([string]$scriptMessage) {
     $HOST.UI.RawUI.Flushinputbuffer()
-    Write-Host ("Do you want to install "+ $scriptName +" [y/n]? ") -ForegroundColor Cyan -NoNewline
+    Write-Host ($scriptMessage +" [y/n]? ") -ForegroundColor Cyan -NoNewline
     $input = Read-Host 
     return $input.SubString(0,1)
 }
 
-function manual_script([string]$scriptLocation, [string]$scriptName) {
-    $choice = ask_input $scriptName
+function manual_script([string]$scriptLocation, [string]$scriptMessage) {
+    $choice = ask_input $scriptMessage
 
     if ($choice -eq "y" -or $choice -eq "Y") {
         . $scriptLocation
@@ -31,14 +31,14 @@ function manual_script([string]$scriptLocation, [string]$scriptName) {
         exit 0
     }
     else {
-        Write-Host ($scriptName + " will not be installed...")
+        Write-Host ($scriptMessage + " >>> will not be executed...")
     }
 }
 
-function request_script([string]$scriptLocation, [string]$scriptName) {
+function request_script([string]$scriptLocation, [string]$scriptMessage) {
     
     if ($manual) {
-        manual_script $scriptLocation $scriptName
+        manual_script $scriptLocation $scriptMessage
     }
     else {
         . $scriptLocation
@@ -50,13 +50,13 @@ function request_script([string]$scriptLocation, [string]$scriptName) {
 # ------------------------------------------------------------------------
 
 function update_script() { 
-    request_script "..\maintenance\update.ps1" "Windows Update"
+    request_script "..\maintenance\update.ps1" "Install Windows Update"
 }
 
 function install_winget_programs() {
     if (Get-Command winget) {
         print_all "..\source\winget_ids.txt"
-        request_script "..\modules\install_winget_programs.ps1" "Winget packages"
+        request_script "..\modules\install_winget_programs.ps1" "Install Winget packages"
     }
     else {
         Write-Host
@@ -66,17 +66,17 @@ function install_winget_programs() {
 }
 
 function install_choco() {
-    request_script "..\modules\install_choco.ps1" "Chocolatey"
+    request_script "..\modules\install_choco.ps1" "Install Chocolatey"
 }
 
 function install_scoop() {
-    request_script "..\modules\install_scoop.ps1" "Scoop"
+    request_script "..\modules\install_scoop.ps1" "Install Scoop"
 }
 
 function install_scoop_programs() {
     if (Get-Command scoop){
         print_all "..\source\scoop_ids.txt"
-        request_script "..\modules\install_scoop_programs.ps1" "Scoop packages"
+        request_script "..\modules\install_scoop_programs.ps1" "Install Scoop packages"
     }
     else {
         Write-Host
@@ -86,7 +86,11 @@ function install_scoop_programs() {
 }
 
 function install_wsl() {
-    request_script "..\modules\install_wsl.ps1" "WSL"
+    request_script "..\modules\install_wsl.ps1" "Install WSL"
+}
+
+function uninstall_bloatware() {
+    request_script "..\maintenance\remove_bloatware.ps1" "Uninstall bloatware"
 }
 
 # ------------------------------------------------------------------------
@@ -134,6 +138,8 @@ function main() {
     install_scoop
     install_scoop_programs
     install_wsl
+
+    uninstall_bloatware
 }
 
 # ------------------------------------------------------------------------
