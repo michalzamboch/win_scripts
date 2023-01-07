@@ -8,7 +8,22 @@ function winget_install($program) {
 
 # ----------------------------------------------------------------
 
-foreach ($item in Get-Content $winget_packakes_path) {
-    Write-Host ""
-    winget_install $item
+function install() {
+    foreach ($item in Get-Content $winget_packakes_path) {
+        Write-Host ""
+        winget_install $item
+    }
 }
+
+function main() {
+    if (Get-Command winget){
+        install
+    }
+    else {
+        return 1
+    }
+}
+
+# ----------------------------------------------------------------
+
+main
