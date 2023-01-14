@@ -11,7 +11,6 @@ Fedora.FedoraMediaWriter
 Ghisler.TotalCommander
 Giorgiotani.Peazip
 Git.Git
-JGraph.Draw
 JetBrains.IntelliJIDEA.Community
 LLVM.LLVM
 Love2d.Love2d
