@@ -4,7 +4,11 @@ function is_admin() {
     return $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 }
 
-Set-ExecutionPolicy RemoteSigned -Scope CurrentUser # Optional: Needed to run a remote script the first time
+# ---------------------------------------------------------
+
+if (Get-ExecutionPolicy -eq "Restricted") {
+    Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+}
 
 if (is_admin) {
     iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
