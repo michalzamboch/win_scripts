@@ -6,8 +6,6 @@ function winget_install($program) {
     winget install --silent --accept-package-agreements --accept-source-agreements --id $program
 }
 
-# ----------------------------------------------------------------
-
 function install() {
     foreach ($item in Get-Content $winget_packakes_path) {
         Write-Host ""

@@ -16,22 +16,27 @@ function print_all([string]$location) {
 
 function ask_input([string]$scriptMessage) {
     $HOST.UI.RawUI.Flushinputbuffer()
-    Write-Host ($scriptMessage +" [y/n]? ") -ForegroundColor Cyan -NoNewline
+    Write-Host ($scriptMessage +" [y/a/n/q]? ") -ForegroundColor Cyan -NoNewline
     $input = Read-Host 
-    return $input.SubString(0,1)
+    $input = $input.Trim()
+    return $input.SubString(0,1).ToLower()
 }
 
 function manual_script([string]$scriptLocation, [string]$scriptMessage) {
     $choice = ask_input $scriptMessage
 
-    if ($choice -eq "y" -or $choice -eq "Y") {
+    if ($choice -eq "y") {
+        . $scriptLocation
+    }
+    elseif ($choice -eq "a") {
+        $manual = $true
         . $scriptLocation
     }
     elseif ($choice -eq "q") {
         exit 0
     }
     else {
-        Write-Host ($scriptMessage + " >>> will not be executed...")
+        Write-Host ("`n" + $scriptMessage + " >>> will not be executed...") -ForegroundColor Magenta
     }
 }
 
@@ -59,9 +64,7 @@ function install_winget_programs() {
         request_script "..\modules\install_winget_programs.ps1" "Install Winget packages"
     }
     else {
-        Write-Host
-        Write-Host "Missing Winget package manager." -ForegroundColor Yellow
-        Write-Host
+        Write-Host "`nMissing Winget package manager.`n" -ForegroundColor Yellow
     }
 }
 
@@ -79,9 +82,7 @@ function install_scoop_programs() {
         request_script "..\modules\install_scoop_programs.ps1" "Install Scoop packages"
     }
     else {
-        Write-Host
-        Write-Host "Missing Scoop package manager." -ForegroundColor Yellow
-        Write-Host
+        Write-Host "`nMissing Scoop package manager.`n" -ForegroundColor Yellow
     }
 }
 
@@ -102,16 +103,12 @@ function is_admin() {
 
 function check_prerequisites() {
     if (-Not (Get-Command "winget")) {
-        Write-Host ""
-        Write-Host "You have to install winget first, to run this script." -ForegroundColor Red 
-        Write-Host ""
+        Write-Host "`nYou have to install winget first, to run this script.`n" -ForegroundColor Red 
         exit
     }
 
     if (-Not (is_admin)) {
-        Write-Host ""
-        Write-Host "You have to run this script as an Administrator." -ForegroundColor Red
-        Write-Host ""
+        Write-Host "`nYou have to run this script as an Administrator.`n" -ForegroundColor Red
         exit
     }
 }
