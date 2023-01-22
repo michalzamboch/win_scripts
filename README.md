@@ -18,5 +18,5 @@ https://github.com/michalzamboch/win_scripts
 
 ## Allow executing scripts
 ```powershell
-Set-ExecutionPolicy unrestricted
+Set-ExecutionPolicy Unrestricted
 ```

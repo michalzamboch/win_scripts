@@ -4,7 +4,6 @@ $manual = $argument -ne "-y"
 
 # ------------------------------------------------------------------------
 
-
 function file_empty([string]$file) {
     return [String]::IsNullOrWhiteSpace((Get-content $file))
 }
