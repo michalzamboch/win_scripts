@@ -15,5 +15,5 @@ if (Get-Command winget) {
     }
 }
 else {
-    Write-Host "Need to have installed winget package." -Foregroundcolor Red
+    Write-Host "Need to have installed Winget package manager." -Foregroundcolor Red
 }

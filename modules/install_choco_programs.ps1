@@ -1,4 +1,4 @@
-$winget_packakes_path = "..\source\winget_ids.txt"
+$choco_packakes_path = "..\source\choco_ids.txt"
 
 # ----------------------------------------------------------------
 
@@ -6,19 +6,19 @@ function not_empty($file) {
     return -not ([String]::IsNullOrWhiteSpace((Get-content $file)))
 }
 
-function winget_install($program) {
-    winget install --silent --accept-package-agreements --accept-source-agreements --id $program
+function choco_install($program) {
+    choco install $program
 }
 
 function install() {
-    foreach ($item in Get-Content $winget_packakes_path) {
+    foreach ($item in Get-Content $choco_packakes_path) {
         Write-Host ""
-        winget_install $item
+        choco_install $item
     }
 }
 
 function main() {
-    if ((Get-Command winget) -and (not_empty $scoop_packakes_path)){
+    if ((Get-Command choco) -and (not_empty $choco_packakes_path)){
         install
     }
     else {

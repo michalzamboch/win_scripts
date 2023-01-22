@@ -2,6 +2,10 @@ $scoop_packakes_path = "..\source\scoop_ids.txt"
 
 # ----------------------------------------------------------------
 
+function not_empty($file) {
+    return -not ([String]::IsNullOrWhiteSpace((Get-content $file)))
+}
+
 function scoop_install($program) {
     scoop install $program
 }
@@ -15,7 +19,7 @@ function install() {
 }
 
 function main() {
-    if (Get-Command scoop){
+    if ((Get-Command scoop) -and (not_empty $scoop_packakes_path)){
         install
     }
     else {

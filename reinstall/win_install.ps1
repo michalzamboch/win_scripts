@@ -4,6 +4,11 @@ $manual = $argument -ne "-y"
 
 # ------------------------------------------------------------------------
 
+
+function file_empty([string]$file) {
+    return [String]::IsNullOrWhiteSpace((Get-content $file))
+}
+
 function print_line() {
     Write-Host "-----------------------------------------------------"
 }
@@ -59,8 +64,13 @@ function update_script() {
 }
 
 function install_winget_programs() {
+    $file = "..\source\winget_ids.txt"
+      if (file_empty $file) {
+        return 1
+    }
+
     if (Get-Command winget) {
-        print_all "..\source\winget_ids.txt"
+        print_all file
         request_script "..\modules\install_winget_programs.ps1" "Install Winget packages"
     }
     else {
@@ -72,13 +82,33 @@ function install_choco() {
     request_script "..\modules\install_choco.ps1" "Install Chocolatey"
 }
 
+function install_choco_programs() {
+    $file = "..\source\choco_ids.txt"
+    if (file_empty $file) {
+        return 1
+    }
+
+    if (Get-Command choco){
+        print_all $file
+        request_script "..\modules\install_choco_programs.ps1" "Install Chocolatey packages"
+    }
+    else {
+        Write-Host "`nMissing Choco package manager.`n" -ForegroundColor Yellow
+    }
+}
+
 function install_scoop() {
     request_script "..\modules\install_scoop.ps1" "Install Scoop"
 }
 
 function install_scoop_programs() {
+    $file = "..\source\scoop_ids.txt"
+    if (file_empty $file) {
+        return 1
+    }
+
     if (Get-Command scoop){
-        print_all "..\source\scoop_ids.txt"
+        print_all $file
         request_script "..\modules\install_scoop_programs.ps1" "Install Scoop packages"
     }
     else {
@@ -132,6 +162,7 @@ function main() {
     install_winget_programs
 
     install_choco
+    install_choco_programs
     install_scoop
     install_scoop_programs
     install_wsl
