@@ -153,10 +153,17 @@ function welcome_message() {
     Read-Host
 }
 
+function elapsed_time($time) {
+    $currentTime = $time.Elapsed
+    $timeMessage = $([string]::Format("`nReinstall time: {0:d2}:{1:d2}:{2:d2}", $currentTime.hours, $currentTime.minutes, $currentTime.seconds))
+    Write-Host $timeMessage
+}
+
 function main() {
     check_prerequisites
     welcome_message
 
+    $time = [System.Diagnostics.Stopwatch]::StartNew()
     update_script
     install_winget_programs
 
@@ -167,6 +174,7 @@ function main() {
     install_wsl
 
     uninstall_bloatware
+    elapsed_time $time
 }
 
 # ------------------------------------------------------------------------
