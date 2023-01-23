@@ -33,7 +33,7 @@ function manual_script([string]$scriptLocation, [string]$scriptMessage) {
         . $scriptLocation
     }
     elseif ($choice -eq "a") {
-        $manual = $true
+        $manual = $false
         . $scriptLocation
     }
     elseif ($choice -eq "q") {
