@@ -18,7 +18,7 @@ function install() {
 }
 
 function main() {
-    if ((Get-Command winget) -and (not_empty $scoop_packakes_path)){
+    if ((Get-Command winget) -and (not_empty $winget_packakes_path)){
         install
     }
     else {
