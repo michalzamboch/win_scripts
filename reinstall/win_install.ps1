@@ -155,8 +155,8 @@ function welcome_message() {
 
 function elapsed_time($time) {
     $currentTime = $time.Elapsed
-    $timeMessage = $([string]::Format("`nReinstall time: {0:d2}:{1:d2}:{2:d2}", $currentTime.hours, $currentTime.minutes, $currentTime.seconds))
-    Write-Host $timeMessage
+    $timeMessage = $([string]::Format("`nFull reinstall time: {0:d2}:{1:d2}:{2:d2}", $currentTime.hours, $currentTime.minutes, $currentTime.seconds))
+    Write-Host $timeMessage -ForegroundColor Cyan
 }
 
 function main() {
