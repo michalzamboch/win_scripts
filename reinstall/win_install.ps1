@@ -69,7 +69,7 @@ function install_winget_programs() {
     }
 
     if (Get-Command winget) {
-        print_all file
+        print_all $file
         request_script "..\modules\install_winget_programs.ps1" "Install Winget packages"
     }
     else {
