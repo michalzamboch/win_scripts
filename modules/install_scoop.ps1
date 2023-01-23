@@ -6,7 +6,7 @@ function is_admin() {
 
 # ---------------------------------------------------------
 
-if (Get-ExecutionPolicy -eq "Restricted") {
+if ((Get-ExecutionPolicy) -eq "Restricted") {
     Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 }
 
