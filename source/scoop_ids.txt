@@ -11,5 +11,6 @@ neovim
 ninja
 nodejs
 python
+rust
 vcpkg
 xmake

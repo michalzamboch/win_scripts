@@ -24,7 +24,6 @@ Oracle.JDK.19
 Oracle.JavaRuntimeEnvironment
 Oracle.VirtualBox
 REALiX.HWiNFO
-Rustlang.Rustup
 Spotify.Spotify
 Valve.Steam
 VideoLAN.VLC
