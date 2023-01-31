@@ -2,6 +2,7 @@ ccat
 ccleaner
 cmake
 conan
+fzf
 gcc
 lua
 luacheck
@@ -12,5 +13,6 @@ ninja
 nodejs
 python
 rust
+v
 vcpkg
 xmake
