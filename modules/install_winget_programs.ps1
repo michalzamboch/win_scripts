@@ -1,4 +1,4 @@
-$winget_packakes_path = "..\source\winget_ids.txt"
+$winget_packakes_path = "..\resources\winget_ids.txt"
 
 # ----------------------------------------------------------------
 

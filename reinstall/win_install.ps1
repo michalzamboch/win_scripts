@@ -63,7 +63,7 @@ function update_script() {
 }
 
 function install_winget_programs() {
-    $file = "..\source\winget_ids.txt"
+    $file = "..\resources\winget_ids.txt"
       if (file_empty $file) {
         return 1
     }
@@ -82,7 +82,7 @@ function install_choco() {
 }
 
 function install_choco_programs() {
-    $file = "..\source\choco_ids.txt"
+    $file = "..\resources\choco_ids.txt"
     if (file_empty $file) {
         return 1
     }
@@ -101,7 +101,7 @@ function install_scoop() {
 }
 
 function install_scoop_programs() {
-    $file = "..\source\scoop_ids.txt"
+    $file = "..\resources\scoop_ids.txt"
     if (file_empty $file) {
         return 1
     }
