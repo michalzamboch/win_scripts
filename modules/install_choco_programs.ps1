@@ -1,4 +1,4 @@
-$choco_packakes_path = "..\source\choco_ids.txt"
+$choco_packakes_path = "..\resources\choco_ids.txt"
 
 # ----------------------------------------------------------------
 

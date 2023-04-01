@@ -1,4 +1,4 @@
-$scoop_packakes_path = "..\source\scoop_ids.txt"
+$scoop_packakes_path = "..\resources\scoop_ids.txt"
 
 # ----------------------------------------------------------------
 
