@@ -1,12 +1,12 @@
+bleachbit
 ccat
-ccleaner
 cmake
-conan
 fzf
 gcc
+golang
+llvm
 ln
 lua
-luacheck
 luarocks
 maven
 make
@@ -22,7 +22,4 @@ sudo
 terminal-icons
 time
 touch
-v
-vcpkg
 xmake
-DroidSansMono-NF

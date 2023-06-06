@@ -22,8 +22,7 @@ function ask_input([string]$scriptMessage) {
     $HOST.UI.RawUI.Flushinputbuffer()
     Write-Host ($scriptMessage +" [y/a/n/q]? ") -ForegroundColor Cyan -NoNewline
     $input = Read-Host 
-    $input = $input.Trim()
-    return $input.SubString(0,1).ToLower()
+    return $input.Trim().SubString(0,1).ToLower()
 }
 
 function manual_script([string]$scriptLocation, [string]$scriptMessage) {
@@ -155,8 +154,19 @@ function welcome_message() {
 
 function elapsed_time($time) {
     $currentTime = $time.Elapsed
-    $timeMessage = $([string]::Format("`nFull reinstall time: {0:d2}:{1:d2}:{2:d2}", $currentTime.hours, $currentTime.minutes, $currentTime.seconds))
+    $timeMessage = $([string]::Format("`nFull install time: {0:d2}:{1:d2}:{2:d2}", $currentTime.hours, $currentTime.minutes, $currentTime.seconds))
     Write-Host $timeMessage -ForegroundColor Cyan
+}
+
+function execute() {
+    update_script
+    install_winget_programs
+
+    install_scoop
+    install_scoop_programs
+    install_wsl
+
+    uninstall_bloatware
 }
 
 function main() {
@@ -164,16 +174,9 @@ function main() {
     welcome_message
 
     $time = [System.Diagnostics.Stopwatch]::StartNew()
-    update_script
-    install_winget_programs
+    
+    execute
 
-    install_choco
-    install_choco_programs
-    install_scoop
-    install_scoop_programs
-    install_wsl
-
-    uninstall_bloatware
     elapsed_time $time
 }
 
