@@ -12,8 +12,6 @@ Microsoft.VisualStudio.2022.Community
 Microsoft.VisualStudioCode
 Microsoft.WindowsTerminal
 MiniTool.PartitionWizard.Free
-Oracle.JDK.19
-Oracle.JavaRuntimeEnvironment
 Oracle.VirtualBox
 REALiX.HWiNFO
 Spotify.Spotify

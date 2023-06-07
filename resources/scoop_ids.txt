@@ -16,6 +16,8 @@ neofetch
 neovim
 ninja
 nodejs
+openjdk
+oraclejre8
 python
 rust
 sudo
