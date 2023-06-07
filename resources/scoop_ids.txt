@@ -3,14 +3,14 @@ ccat
 cmake
 fzf
 gcc
-golang
+go
 llvm
 ln
 lua
 luarocks
 maven
 make
-mc
+meld
 mingw
 neofetch
 neovim

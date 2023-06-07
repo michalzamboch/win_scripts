@@ -44,6 +44,7 @@ function manual_script([string]$scriptLocation, [string]$scriptMessage) {
 }
 
 function request_script([string]$scriptLocation, [string]$scriptMessage) {
+    $HOST.UI.RawUI.Flushinputbuffer()
     
     if ($manual) {
         manual_script $scriptLocation $scriptMessage
