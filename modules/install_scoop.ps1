@@ -1,4 +1,9 @@
 
+$buckets = 
+    "extras",
+    "games",
+    "java"
+
 function is_admin() {
     $currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
     return $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
@@ -17,5 +22,7 @@ else {
     irm get.scoop.sh | iex
 }
 
-scoop bucket add extras
-scoop bucket add games
+foreach ($item in $buckets) {
+    scoop bucket add $item
+}
+
