@@ -9,5 +9,5 @@ Add-WUServiceManager -MicrosoftUpdate
 
 Write-Host ""
 Write-Host "Installing updates..."
-Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoReboot
+Install-WindowsUpdate -MicrosoftUpdate -AcceptAll 
 Write-Host "Windows Update is done."
