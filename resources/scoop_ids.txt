@@ -22,6 +22,8 @@ python
 rust
 sudo
 terminal-icons
+starship
+spotify
 time
 touch
 xmake
