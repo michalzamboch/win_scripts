@@ -27,3 +27,4 @@ spotify
 time
 touch
 xmake
+winaero-tweaker
