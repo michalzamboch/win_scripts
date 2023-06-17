@@ -123,6 +123,10 @@ function uninstall_bloatware() {
     request_script "..\maintenance\remove_bloatware.ps1" "Uninstall bloatware"
 }
 
+function custom_software() {
+    request_script "..\modules\custom_software.ps1" "Install Custom software"
+}
+
 # ------------------------------------------------------------------------
 
 function is_admin() {
