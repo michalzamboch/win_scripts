@@ -26,5 +26,6 @@ starship
 spotify
 time
 touch
+v
 xmake
 winaero-tweaker
