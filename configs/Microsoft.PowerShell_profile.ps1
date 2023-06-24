@@ -8,3 +8,4 @@ function sup {scoop update --all; scoop cleanup --cache --all}
 
 Set-Alias sup-dude sup
 Set-Alias -Name ll -Value Get-ChildItem
+Set-Alias -Name cat -Value Get-Content 
