@@ -22,10 +22,12 @@ python
 rust
 sudo
 terminal-icons
+shutup10
 starship
 spotify
 time
 touch
+unzip
 v
 xmake
-winaero-tweaker
+zip
