@@ -18,6 +18,11 @@ function install() {
 }
 
 function main() {
+    if ( -not (Get-Command winget)) {
+        Write-Host "`nMissing Winget package manager.`n" -ForegroundColor Yellow
+        return 1
+    }
+
     if ((Get-Command winget) -and (not_empty $winget_packakes_path)){
         install
     }
