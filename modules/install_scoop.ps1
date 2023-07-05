@@ -2,7 +2,8 @@
 $buckets = 
     "extras",
     "games",
-    "java"
+    "java",
+    "nerd-fonts"
 
 function is_admin() {
     $currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
