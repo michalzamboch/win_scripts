@@ -109,6 +109,10 @@ function set_profile() {
     try_request_script "..\modules\set_profile.ps1" "Set profile config"
 }
 
+function common_setup() {
+    try_request_script "..\maintenance\common_setup.ps1" "Common setup"
+}
+
 # ------------------------------------------------------------------------
 
 function is_admin() {
@@ -153,6 +157,7 @@ function execute() {
 
     custom_software
     set_profile
+    common_setup
 
     uninstall_bloatware
     update_script
