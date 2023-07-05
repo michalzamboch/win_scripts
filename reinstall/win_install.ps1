@@ -12,6 +12,13 @@ function print_line() {
     Write-Host "-----------------------------------------------------"
 }
 
+function write_log ([string] $message) {
+    $LogFilePath = ".\log.txt"
+
+    "$([datetime]::Now) : $message" | Out-File -FilePath $LogFilePath -append;
+    Write-host $([datetime]::Now) $message -ForegroundColor Red
+}
+
 function ask_input([string]$scriptMessage) {
     $HOST.UI.RawUI.Flushinputbuffer()
     Write-Host ($scriptMessage +" [y/a/n/q]? ") -ForegroundColor Cyan -NoNewline
@@ -51,46 +58,55 @@ function request_script([string]$scriptLocation, [string]$scriptMessage) {
     Write-Host ""
 }
 
+function try_request_script([string]$scriptLocation, [string]$scriptMessage) {
+    try {
+        request_script $scriptLocation $scriptMessage
+    }
+    catch {
+        write_log ("An error occurred during: " + $scriptMessage)
+    }
+}
+
 # ------------------------------------------------------------------------
 
 function update_script() { 
-    request_script "..\maintenance\update.ps1" "Install Windows Update"
+    try_request_script "..\maintenance\update.ps1" "Install Windows Update"
 }
 
 function install_winget_programs() {
-    request_script "..\modules\install_winget_programs.ps1" "Install Winget packages"
+    try_request_script "..\modules\install_winget_programs.ps1" "Install Winget packages"
 }
 
 function install_choco() {
-    request_script "..\modules\install_choco.ps1" "Install Chocolatey"
+    try_request_script "..\modules\install_choco.ps1" "Install Chocolatey"
 }
 
 function install_choco_programs() {
-    request_script "..\modules\install_choco_programs.ps1" "Install Chocolatey packages"
+    try_request_script "..\modules\install_choco_programs.ps1" "Install Chocolatey packages"
 }
 
 function install_scoop() {
-    request_script "..\modules\install_scoop.ps1" "Install Scoop"
+    try_request_script "..\modules\install_scoop.ps1" "Install Scoop"
 }
 
 function install_scoop_programs() {
-    request_script "..\modules\install_scoop_programs.ps1" "Install Scoop packages"
+    try_request_script "..\modules\install_scoop_programs.ps1" "Install Scoop packages"
 }
 
 function install_wsl() {
-    request_script "..\modules\install_wsl.ps1" "Install WSL"
+    try_request_script "..\modules\install_wsl.ps1" "Install WSL"
 }
 
 function uninstall_bloatware() {
-    request_script "..\maintenance\remove_bloatware.ps1" "Uninstall bloatware"
+    try_request_script "..\maintenance\remove_bloatware.ps1" "Uninstall bloatware"
 }
 
 function custom_software() {
-    request_script "..\modules\custom_software.ps1" "Install Custom software"
+    try_request_script "..\modules\custom_software.ps1" "Install Custom software"
 }
 
 function set_profile() {
-    request_script "..\modules\set_profile.ps1" "Set profile config"
+    try_request_script "..\modules\set_profile.ps1" "Set profile config"
 }
 
 # ------------------------------------------------------------------------
