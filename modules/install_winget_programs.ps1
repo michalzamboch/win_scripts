@@ -2,6 +2,12 @@ $winget_packakes_path = "..\configs\packages\winget.txt"
 
 # ----------------------------------------------------------------
 
+function print_all([string]$location) {
+    foreach ($line in Get-Content $location) {
+        Write-host (" - " + $line)
+    }
+}
+
 function empty($file) {
     return ([String]::IsNullOrWhiteSpace((Get-content $file)))
 }
