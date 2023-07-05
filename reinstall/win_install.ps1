@@ -12,15 +12,10 @@ function print_line() {
     Write-Host "-----------------------------------------------------"
 }
 
-function print_all([string]$location) {
-    foreach ($line in Get-Content $location) {
-        Write-host (" - " + $line)
-    }
-}
-
 function ask_input([string]$scriptMessage) {
     $HOST.UI.RawUI.Flushinputbuffer()
     Write-Host ($scriptMessage +" [y/a/n/q]? ") -ForegroundColor Cyan -NoNewline
+    
     $input = Read-Host 
     return $input.Trim().SubString(0,1).ToLower()
 }
@@ -139,8 +134,8 @@ function execute() {
     install_wsl
 
     uninstall_bloatware
-
-    Restart-Computer
+    
+    Write-Host "`nIt is recommended to restart your computer now.`n" -ForegroundColor Cyan
 }
 
 function main() {
