@@ -1,5 +1,5 @@
-$scoop_packakes_path = "..\resources\scoop_ids.txt"
-$admin_scoop_packakes_path = "..\resources\scoop_admin_ids.txt"
+$scoop_packakes_path = "..\configs\packages\scoop.txt"
+$admin_scoop_packakes_path = "..\configs\packages\scoop_admin.txt"
 
 # ----------------------------------------------------------------
 

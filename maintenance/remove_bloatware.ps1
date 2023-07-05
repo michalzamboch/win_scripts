@@ -1,4 +1,4 @@
-$packakes_path = "..\resources\bloatware_ids.txt"
+$packakes_path = "..\configs\packages\bloatware.txt"
 
 # ----------------------------------------------------------------
 
