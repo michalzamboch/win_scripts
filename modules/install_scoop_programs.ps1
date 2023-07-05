@@ -56,8 +56,7 @@ function main() {
     }
 
     print_all $admin_scoop_packakes_path
-    scoop install sudo
-    sudo admin_install
+    admin_install
 }
 
 # ----------------------------------------------------------------
