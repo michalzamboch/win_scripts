@@ -25,7 +25,7 @@ sudo
 terminal-icons
 shutup10
 starship
-spotify
+scoop-completion
 time
 touch
 unzip

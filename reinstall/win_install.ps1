@@ -89,6 +89,10 @@ function custom_software() {
     request_script "..\modules\custom_software.ps1" "Install Custom software"
 }
 
+function set_profile() {
+    request_script "..\modules\set_profile.ps1" "Set profile config"
+}
+
 # ------------------------------------------------------------------------
 
 function is_admin() {
@@ -126,14 +130,16 @@ function elapsed_time($time) {
 }
 
 function execute() {
-    update_script
     install_winget_programs
-
     install_scoop
     install_scoop_programs
     install_wsl
 
+    custom_software
+    set_profile
+
     uninstall_bloatware
+    update_script
     
     Write-Host "`nIt is recommended to restart your computer now.`n" -ForegroundColor Cyan
 }
