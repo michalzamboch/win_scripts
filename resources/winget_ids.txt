@@ -13,7 +13,6 @@ Microsoft.VisualStudioCode
 Microsoft.WindowsTerminal
 MiniTool.PartitionWizard.Free
 Oracle.VirtualBox
-REALiX.HWiNFO
 SatoshiLabs.TrezorBridge
 SatoshiLabs.trezor-suite
 Valve.Steam

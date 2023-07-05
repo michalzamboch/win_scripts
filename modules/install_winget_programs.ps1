@@ -2,8 +2,8 @@ $winget_packakes_path = "..\resources\winget_ids.txt"
 
 # ----------------------------------------------------------------
 
-function not_empty($file) {
-    return -not ([String]::IsNullOrWhiteSpace((Get-content $file)))
+function empty($file) {
+    return ([String]::IsNullOrWhiteSpace((Get-content $file)))
 }
 
 function winget_install($program) {
@@ -23,12 +23,13 @@ function main() {
         return 1
     }
 
-    if ((Get-Command winget) -and (not_empty $winget_packakes_path)){
-        install
+    if (empty $winget_packakes_path){
+        Write-Host "`nNo package to install with winget package manager.`n" -ForegroundColor Cyan
+        return 2
     }
-    else {
-        return 1
-    }
+    
+    print_all $winget_packakes_path
+    install
 }
 
 # ----------------------------------------------------------------

@@ -63,18 +63,7 @@ function update_script() {
 }
 
 function install_winget_programs() {
-    $file = "..\resources\winget_ids.txt"
-      if (file_empty $file) {
-        return 1
-    }
-
-    if (Get-Command winget) {
-        print_all $file
-        request_script "..\modules\install_winget_programs.ps1" "Install Winget packages"
-    }
-    else {
-        Write-Host "`nMissing Winget package manager.`n" -ForegroundColor Yellow
-    }
+    request_script "..\modules\install_winget_programs.ps1" "Install Winget packages"
 }
 
 function install_choco() {
@@ -82,18 +71,7 @@ function install_choco() {
 }
 
 function install_choco_programs() {
-    $file = "..\resources\choco_ids.txt"
-    if (file_empty $file) {
-        return 1
-    }
-
-    if (Get-Command choco){
-        print_all $file
-        request_script "..\modules\install_choco_programs.ps1" "Install Chocolatey packages"
-    }
-    else {
-        Write-Host "`nMissing Choco package manager.`n" -ForegroundColor Yellow
-    }
+    request_script "..\modules\install_choco_programs.ps1" "Install Chocolatey packages"
 }
 
 function install_scoop() {

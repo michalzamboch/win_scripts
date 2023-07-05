@@ -4,6 +4,7 @@ cmake
 fzf
 gcc
 go
+hwinfo
 llvm
 ln
 lua

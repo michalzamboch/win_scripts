@@ -2,8 +2,8 @@ $choco_packakes_path = "..\resources\choco_ids.txt"
 
 # ----------------------------------------------------------------
 
-function not_empty($file) {
-    return -not ([String]::IsNullOrWhiteSpace((Get-content $file)))
+function empty($file) {
+    return ([String]::IsNullOrWhiteSpace((Get-content $file)))
 }
 
 function choco_install($program) {
@@ -17,13 +17,25 @@ function install() {
     }
 }
 
-function main() {
-    if ((Get-Command choco) -and (not_empty $choco_packakes_path)){
-        install
+function print_all([string]$location) {
+    foreach ($line in Get-Content $location) {
+        Write-host (" - " + $line)
     }
-    else {
+}
+
+function main() {
+    if ( -not (Get-Command choco)) {
+        Write-Host "`nMissing Choco package manager.`n" -ForegroundColor Yellow
         return 1
     }
+
+    if (empty $choco_packakes_path){
+        Write-Host "`nNo package to install with choco package manager.`n" -ForegroundColor Cyan
+        return 2
+    }
+    
+    print_all $choco_packakes_path
+    install
 }
 
 # ----------------------------------------------------------------

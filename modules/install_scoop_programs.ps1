@@ -3,8 +3,14 @@ $admin_scoop_packakes_path = "..\resources\scoop_admin_ids.txt"
 
 # ----------------------------------------------------------------
 
-function not_empty($file) {
-    return -not ([String]::IsNullOrWhiteSpace((Get-content $file)))
+function empty($file) {
+    return ([String]::IsNullOrWhiteSpace((Get-content $file)))
+}
+
+function print_all([string]$location) {
+    foreach ($line in Get-Content $location) {
+        Write-host (" - " + $line)
+    }
 }
 
 function scoop_install($program) {
@@ -31,18 +37,27 @@ function admin_install() {
 
 function main() {
     if ( -not (Get-Command scoop)){
+        Write-Host "`nMissing Scoop package manager.`n" -ForegroundColor Yellow
         return 1
     }
-    scoop update --all
 
-    if (not_empty $scoop_packakes_path){
-        install
+    if (empty $scoop_packakes_path){
+        Write-Host "`nNo package to install with scoop package manager.`n" -ForegroundColor Cyan
+        return 2
     }
     
-    if (not_empty $admin_scoop_packakes_path){
-        scoop install sudo
-        sudo admin_install
+    print_all $scoop_packakes_path
+    scoop update --all
+    install
+    
+    if (empty $scoop_packakes_path){
+        Write-Host "`nNo admin package to install with scoop package manager.`n" -ForegroundColor Cyan
+        return 3
     }
+
+    print_all $admin_scoop_packakes_path
+    scoop install sudo
+    sudo admin_install
 }
 
 # ----------------------------------------------------------------
