@@ -79,18 +79,7 @@ function install_scoop() {
 }
 
 function install_scoop_programs() {
-    $file = "..\resources\scoop_ids.txt"
-    if (file_empty $file) {
-        return 1
-    }
-
-    if (Get-Command scoop){
-        print_all $file
-        request_script "..\modules\install_scoop_programs.ps1" "Install Scoop packages"
-    }
-    else {
-        Write-Host "`nMissing Scoop package manager.`n" -ForegroundColor Yellow
-    }
+    request_script "..\modules\install_scoop_programs.ps1" "Install Scoop packages"
 }
 
 function install_wsl() {
@@ -150,6 +139,8 @@ function execute() {
     install_wsl
 
     uninstall_bloatware
+
+    Restart-Computer
 }
 
 function main() {
