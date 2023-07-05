@@ -59,11 +59,12 @@ function request_script([string]$scriptLocation, [string]$scriptMessage) {
 }
 
 function try_request_script([string]$scriptLocation, [string]$scriptMessage) {
-    request_script $scriptLocation $scriptMessage
     try {
+        request_script $scriptLocation $scriptMessage
     }
     catch {
-        write_log ("An error occurred during: " + $scriptMessage)
+        $e = $_.Exception
+        write_log ("An error occurred during: " + $e.Message)
     }
 }
 
