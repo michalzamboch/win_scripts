@@ -1,5 +1,4 @@
 $scoop_packakes_path = "..\configs\packages\scoop.txt"
-$admin_scoop_packakes_path = "..\configs\packages\scoop_admin.txt"
 
 # ----------------------------------------------------------------
 
@@ -17,21 +16,10 @@ function scoop_install($program) {
     scoop install $program
 }
 
-function admin_scoop_install($program) {
-    scoop install -g $program
-}
-
 function install() {
     foreach ($item in Get-Content $scoop_packakes_path) {
         Write-Host ""
         scoop_install $item
-    }
-}
-
-function admin_install() {
-    foreach ($item in Get-Content $admin_scoop_packakes_path) {
-        Write-Host ""
-        admin_scoop_install $item
     }
 }
 
@@ -49,14 +37,6 @@ function main() {
     print_all $scoop_packakes_path
     scoop update --all
     install
-    
-    if (empty $scoop_packakes_path){
-        Write-Host "`nNo admin package to install with scoop package manager.`n" -ForegroundColor Cyan
-        return 3
-    }
-
-    print_all $admin_scoop_packakes_path
-    admin_install
 }
 
 # ----------------------------------------------------------------
