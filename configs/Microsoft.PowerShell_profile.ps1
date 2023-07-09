@@ -10,6 +10,7 @@ Import-Module Terminal-Icons
 Set-Alias -Name ll -Value Get-ChildItem
 Set-Alias -Name empty-trash -Value Clear-RecycleBin
 Set-Alias -Name cat -Value Get-Content
+Set-Alias -Name lg -Value lazygit
 
 # Find programming folder
 function cdp {
