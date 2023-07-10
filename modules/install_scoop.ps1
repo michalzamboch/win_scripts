@@ -1,14 +1,10 @@
+Import-Module "..\lib\module.psm1"
 
 $buckets = 
     "extras",
     "games",
     "java",
     "nerd-fonts"
-
-function is_admin() {
-    $currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
-    return $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
-}
 
 # ---------------------------------------------------------
 

@@ -1,10 +1,8 @@
+Import-Module "..\lib\module.psm1"
+
 $choco_packakes_path = "..\configs\packages\choco.txt"
 
 # ----------------------------------------------------------------
-
-function empty($file) {
-    return ([String]::IsNullOrWhiteSpace((Get-content $file)))
-}
 
 function choco_install($program) {
     choco install $program
@@ -14,12 +12,6 @@ function install() {
     foreach ($item in Get-Content $choco_packakes_path) {
         Write-Host ""
         choco_install $item
-    }
-}
-
-function print_all([string]$location) {
-    foreach ($line in Get-Content $location) {
-        Write-host (" - " + $line)
     }
 }
 

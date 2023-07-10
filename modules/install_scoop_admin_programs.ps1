@@ -1,16 +1,8 @@
+Import-Module "..\lib\module.psm1"
+
 $admin_scoop_packakes_path = "..\configs\packages\scoop_admin.txt"
 
 # ----------------------------------------------------------------
-
-function empty($file) {
-    return ([String]::IsNullOrWhiteSpace((Get-content $file)))
-}
-
-function print_all([string]$location) {
-    foreach ($line in Get-Content $location) {
-        Write-host (" - " + $line)
-    }
-}
 
 function admin_scoop_install($program) {
     scoop install -g $program
@@ -29,7 +21,7 @@ function main() {
         return 1
     }
 
-    if (empty $admin_scoop_packakes_path){
+    if (file_empty $admin_scoop_packakes_path){
         Write-Host "`nNo admin package to install with scoop package manager.`n" -ForegroundColor Cyan
         return 2
     }

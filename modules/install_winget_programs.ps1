@@ -1,16 +1,8 @@
+Import-Module "..\lib\module.psm1"
+
 $winget_packakes_path = "..\configs\packages\winget.txt"
 
 # ----------------------------------------------------------------
-
-function print_all([string]$location) {
-    foreach ($line in Get-Content $location) {
-        Write-host (" - " + $line)
-    }
-}
-
-function empty($file) {
-    return ([String]::IsNullOrWhiteSpace((Get-content $file)))
-}
 
 function winget_install($program) {
     winget install --silent --accept-package-agreements --accept-source-agreements --id $program
@@ -29,7 +21,7 @@ function main() {
         return 1
     }
 
-    if (empty $winget_packakes_path){
+    if (file_empty $winget_packakes_path){
         Write-Host "`nNo package to install with winget package manager.`n" -ForegroundColor Cyan
         return 2
     }
