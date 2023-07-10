@@ -2,9 +2,9 @@
 This repository is a collection of windows scripts, which automate work on Windows os. 
 
 ## Automatic reinstall
-To run automatic reinstall script (.\reinstall\win_install.ps1) type following command.
+To run automatic reinstall script (.\reinstall\reinstall.ps1) type following command.
 ```powershell
-.\win_install.ps1 -y
+.\reinstall.ps1
 ```
 
 ## Updates
