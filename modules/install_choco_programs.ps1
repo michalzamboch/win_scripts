@@ -21,7 +21,7 @@ function main() {
         return 1
     }
 
-    if (empty $choco_packakes_path){
+    if (file_empty $choco_packakes_path){
         Write-Host "`nNo package to install with choco package manager.`n" -ForegroundColor Cyan
         return 2
     }
