@@ -1,6 +1,9 @@
 
 $destination = $home + "\Documents\PowerShell"
-mkdir $destination 
+
+if ( -not (Test-Path $destination)) {
+    mkdir $destination 
+}
 
 cp ..\configs\Microsoft.PowerShell_profile.ps1 $destination
 
