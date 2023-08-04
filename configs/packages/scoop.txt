@@ -20,7 +20,6 @@ nodejs
 openjdk
 oraclejre8
 python
-rust
 sudo
 terminal-icons
 shutup10
